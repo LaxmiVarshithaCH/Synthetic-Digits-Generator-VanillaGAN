@@ -249,15 +249,7 @@ python -c "from src.inference import generate_images; generate_images(num_images
 
 <table>
   <tr>
-    <td align="center">
-      <a href="https://github.com/LaxmiVarshithaCH">
-        <img src="https://avatars.githubusercontent.com/LaxmiVarshithaCH" width="100px;" alt=""/>
-        <br />
-        <sub><b>Chennupalli Laxmi Varshitha</b></sub>
-      </a>
-      <br />
-    </td>
-    <td align="center">
+      <td align="center">
       <a href="https://github.com/ishitachowdary">
         <img src="https://avatars.githubusercontent.com/ishitachowdary" width="100px;" alt=""/>
         <br />
@@ -269,7 +261,15 @@ python -c "from src.inference import generate_images; generate_images(num_images
       <a href="https://github.com/LaxmiVarshithaCH">
         <img src="https://avatars.githubusercontent.com/LaxmiVarshithaCH" width="100px;" alt=""/>
         <br />
-        <sub><b>Chennupalli Laxmi Varshitha/b></sub>
+        <sub><b>Chennupalli Laxmi Varshitha</b></sub>
+      </a>
+      <br />
+    </td>
+    <td align="center">
+      <a href="https://github.com/LaxmiVarshithaCH">
+        <img src="https://avatars.githubusercontent.com/LaxmiVarshithaCH" width="100px;" alt=""/>
+        <br />
+        <sub><b>Y. Jhansi</b></sub>
       </a>
       <br />
     </td>
@@ -277,7 +277,23 @@ python -c "from src.inference import generate_images; generate_images(num_images
       <a href="https://github.com/LaxmiVarshithaCH">
         <img src="https://avatars.githubusercontent.com/LaxmiVarshithaCH" width="100px;" alt=""/>
         <br />
-        <sub><b>Chennupalli Laxmi Varshitha/b></sub>
+        <sub><b>V. Swarna Blessy</b></sub>
+      </a>
+      <br />
+    </td>
+      <td align="center">
+      <a href="https://github.com/LaxmiVarshithaCH">
+        <img src="https://avatars.githubusercontent.com/LaxmiVarshithaCH" width="100px;" alt=""/>
+        <br />
+        <sub><b>MD. Muskan</b></sub>
+      </a>
+      <br />
+    </td>
+      <td align="center">
+      <a href="https://github.com/LaxmiVarshithaCH">
+        <img src="https://avatars.githubusercontent.com/LaxmiVarshithaCH" width="100px;" alt=""/>
+        <br />
+        <sub><b>Likihl Sir Sai</b></sub>
       </a>
       <br />
     </td>
@@ -292,6 +308,7 @@ Have suggestions or improvements?
 Feel free to open an issue or submit a pull request. Happy coding! 🚀
 
 ---
+
 
 
 
