@@ -55,6 +55,27 @@ Note: Some directories such as `checkpoints/`, `logs/`, and `data/` were exclude
 
 ---
 
+## Architecture Flow
+
+Below is a high-level diagram showing the core process from data loading, through training, to inference and deployment.
+
+```mermaid
+flowchart TD
+    A[Data Loader] --> B[Train Loop]
+    B --> C[Generator]
+    B --> D[Discriminator]
+    C -->|Generates| E[Fake Images]
+    D -->|Evaluates| E
+    A --> F[Evaluation]
+    F --> G[FID & Diversity]
+    C --> H[Inference Script]
+    H --> I[Samples/Output Images]
+    C --> J[Streamlit App]
+    C --> K[FastAPI Service]
+```
+
+---
+
 ## 🧩 Modules & Design
 
 ### 1) Data Pipeline & Preprocessing
@@ -98,49 +119,6 @@ Discriminator (image → prob):
           └─ Conv2d(64→128, k=4, s=2, p=1)
               └─ LeakyReLU
                   └─ Flatten → Linear(128*7*7 → 1) → Sigmoid
-```
-
-```mermaid
-flowchart LR
-
-    %% =========================
-    %% Generator (LEFT)
-    %% =========================
-    subgraph G["Generator Architecture (z → image)"]
-        direction TB
-        Z["Input z (100-d noise vector)"]
-        L1["Linear (100 → 128×7×7)"]
-        A1["ReLU"]
-        U1["Unflatten → (128, 7, 7)"]
-        CT1["ConvTranspose2d (128 → 64, k=4, s=2, p=1)"]
-        A2["ReLU"]
-        CT2["ConvTranspose2d (64 → 1, k=4, s=2, p=1)"]
-        A3["Tanh → Output (1, 28, 28)"]
-
-        Z --> L1 --> A1 --> U1 --> CT1 --> A2 --> CT2 --> A3
-    end
-
-    %% =========================
-    %% Discriminator (RIGHT)
-    %% =========================
-    subgraph D["Discriminator Architecture (image → probability)"]
-        direction TB
-        X["Input image (1, 28, 28)"]
-        C1["Conv2d (1 → 64, k=4, s=2, p=1)"]
-        D1["LeakyReLU"]
-        C2["Conv2d (64 → 128, k=4, s=2, p=1)"]
-        D2["LeakyReLU"]
-        F1["Flatten"]
-        L2["Linear (128×7×7 → 1)"]
-        A4["Sigmoid → Real/Fake Probability"]
-
-        X --> C1 --> D1 --> C2 --> D2 --> F1 --> L2 --> A4
-    end
-
-    %% Invisible edge to force horizontal layout
-    G --- D
-
-
 ```
 
 Low-level details (weights, activations, loss):
@@ -293,6 +271,7 @@ Add a `LICENSE` file (e.g., MIT or Apache-2.0) to make the license explicit.
 ## ✨ Acknowledgements
 
 This repository is intended for experiments, demos, and teaching GAN fundamentals. If you'd like diagrams, CI badges, or a `CONTRIBUTING.md`, tell me which one to add next.
+
 
 
 
