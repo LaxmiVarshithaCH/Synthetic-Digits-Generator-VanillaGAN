@@ -247,12 +247,44 @@ python -c "from src.inference import generate_images; generate_images(num_images
 
 ---
 
-## 👥 Team & Maintainers
+## 👥 Team
 
-- Maintainer: **Replace with your name** — add email or GitHub handle here
-- Contributors: Add names or link to `CONTRIBUTING.md`
-
-If you'd like, I can populate this section with real team member names and contact information.
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/LaxmiVarshithaCH">
+        <img src="https://avatars.githubusercontent.com/LaxmiVarshithaCH" width="100px;" alt=""/>
+        <br />
+        <sub><b>Chennupalli Laxmi Varshitha</b></sub>
+      </a>
+      <br />
+    </td>
+    <td align="center">
+      <a href="https://github.com/ishitachowdary">
+        <img src="https://avatars.githubusercontent.com/ishitachowdary" width="100px;" alt=""/>
+        <br />
+        <sub><b>Ishitha Chowdary</b></sub>
+      </a>
+      <br />
+    </td>
+    <td align="center">
+      <a href="https://github.com/LaxmiVarshithaCH">
+        <img src="https://avatars.githubusercontent.com/LaxmiVarshithaCH" width="100px;" alt=""/>
+        <br />
+        <sub><b>Chennupalli Laxmi Varshitha/b></sub>
+      </a>
+      <br />
+    </td>
+      <td align="center">
+      <a href="https://github.com/LaxmiVarshithaCH">
+        <img src="https://avatars.githubusercontent.com/LaxmiVarshithaCH" width="100px;" alt=""/>
+        <br />
+        <sub><b>Chennupalli Laxmi Varshitha/b></sub>
+      </a>
+      <br />
+    </td>
+  </tr>
+</table>
 
 ---
 
@@ -271,6 +303,7 @@ Add a `LICENSE` file (e.g., MIT or Apache-2.0) to make the license explicit.
 ## ✨ Acknowledgements
 
 This repository is intended for experiments, demos, and teaching GAN fundamentals. If you'd like diagrams, CI badges, or a `CONTRIBUTING.md`, tell me which one to add next.
+
 
 
 
