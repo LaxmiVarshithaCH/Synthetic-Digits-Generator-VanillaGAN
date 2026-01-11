@@ -1,0 +1,9 @@
+image_size: 28
+channels: 1
+noise_dim: 100
+batch_size: 64
+epochs: 50
+lr: 0.0002
+beta1: 0.5
+train_split: 0.95
+normalization: tanh

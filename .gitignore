@@ -1,0 +1,15 @@
+data/raw/
+data/processed/
+
+logs/
+*.csv
+__pycache__/
+*.pyc
+venv/
+
+checkpoints/
+runs/
+
+.DS_Store
+.streamlit/
+.ipynb_checkpoints/
