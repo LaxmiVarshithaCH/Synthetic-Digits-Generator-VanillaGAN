@@ -27,7 +27,7 @@ Why this project matters:
 
 ## 📁 File structure
 
-```
+```text
 Synthetic-Digits-Generator-VanillaGAN/
 ├── config.yaml                 # default hyperparameters
 ├── requirements.txt
@@ -97,7 +97,7 @@ python -c "from src.data_loader import get_dataloaders; get_dataloaders()"
 - Generator: Transforms noise vector z (dim = `noise_dim`) into 28×28 image using Linear → ReLU → ConvTranspose layers and `Tanh` output.
 - Discriminator: Small convolutional network ending with Sigmoid probability output.
 
-Architecture diagram (ASCII):
+Architecture:
 
 Generator (z → image):
 ```
@@ -125,8 +125,6 @@ Low-level details (weights, activations, loss):
 - Loss: `BCELoss` for both D and G as implemented in `src/vanilla_gan.py`
 - Optimizer: Adam with `lr` and `beta1` from `config.yaml`
 - Label smoothing for real images (0.9 used in `src/train.py`)
-
-If you want PNG/UML diagrams, add `docs/architecture.png` and reference it here.
 
 ---
 
@@ -204,8 +202,8 @@ Production suggestions:
 Setup and install:
 ```bash
 python -m venv .venv
-source .venv/bin/activate     \\for macos/linux
-.venv\Scripts\activate        \\for windows(cmd)
+source .venv/bin/activate     #for macos/linux
+.venv\Scripts\activate        #for windows(cmd)
 pip install -r requirements.txt
 ```
 
@@ -288,21 +286,12 @@ python -c "from src.inference import generate_images; generate_images(num_images
 
 ---
 
-## 🙌 Contributing
+## 📬 Feedback
+Have suggestions or improvements?
 
-Contributions welcome — please open issues or PRs. Consider adding a `CONTRIBUTING.md` for contribution workflow and a `CODE_OF_CONDUCT.md`.
-
----
-
-## 📜 License
-
-Add a `LICENSE` file (e.g., MIT or Apache-2.0) to make the license explicit.
+Feel free to open an issue or submit a pull request. Happy coding! 🚀
 
 ---
-
-## ✨ Acknowledgements
-
-This repository is intended for experiments, demos, and teaching GAN fundamentals. If you'd like diagrams, CI badges, or a `CONTRIBUTING.md`, tell me which one to add next.
 
 
 
