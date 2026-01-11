@@ -28,7 +28,7 @@ Why this project matters:
 ## 📁 File structure
 
 ```
-project1/
+Synthetic-Digits-Generator-VanillaGAN/
 ├── config.yaml                 # default hyperparameters
 ├── requirements.txt
 ├── Dockerfile                  # (optional) containerization
@@ -51,7 +51,7 @@ project1/
         ├── visualizer.py
         └── logger.py
 ```
-Note: Some directories such as `checkpoints/`, `logs/`, and `data/` may be excluded from version control in `.gitignore` to keep the repository lightweight.
+Note: Some directories such as `checkpoints/`, `logs/`, and `data/` were excluded from version control in `.gitignore` to keep the repository lightweight.
 
 ---
 
@@ -59,12 +59,9 @@ Note: Some directories such as `checkpoints/`, `logs/`, and `data/` may be exclu
 
 ### 1) Data Pipeline & Preprocessing
 
-High level:
 - Uses `torchvision.datasets.MNIST` in `src/data_loader.py`
 - Transforms: resize, ToTensor, Normalize to (-1, 1)
 - Splits dataset into train/test and saves processed subsets under `data/processed/`
-
-Low level:
 - `get_dataloaders()` reads `config.yaml`, constructs transforms, downloads MNIST to `data/raw`, performs `random_split`, and returns `DataLoader` objects.
 
 Commands:
@@ -76,9 +73,8 @@ python -c "from src.data_loader import get_dataloaders; get_dataloaders()"
 
 ### 2) Model Design (Vanilla GAN Architecture)
 
-High level:
-- Generator: transforms noise vector z (dim = `noise_dim`) into 28×28 image using Linear → ReLU → ConvTranspose layers and `Tanh` output.
-- Discriminator: small convolutional network ending with Sigmoid probability output.
+- Generator: Transforms noise vector z (dim = `noise_dim`) into 28×28 image using Linear → ReLU → ConvTranspose layers and `Tanh` output.
+- Discriminator: Small convolutional network ending with Sigmoid probability output.
 
 Architecture diagram (ASCII):
 
@@ -115,7 +111,6 @@ If you want PNG/UML diagrams, add `docs/architecture.png` and reference it here.
 
 ### 3) Training Pipeline
 
-High level steps:
 1. Load config from `config.yaml`
 2. Build dataloaders and models (G, D)
 3. For each epoch: update D on real and fake, update G to fool D
@@ -255,5 +250,6 @@ Add a `LICENSE` file (e.g., MIT or Apache-2.0) to make the license explicit.
 ## ✨ Acknowledgements
 
 This repository is intended for experiments, demos, and teaching GAN fundamentals. If you'd like diagrams, CI badges, or a `CONTRIBUTING.md`, tell me which one to add next.
+
 
 
