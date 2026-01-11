@@ -101,7 +101,7 @@ Discriminator (image → prob):
 ```
 ```mermaid
 flowchart TD
-    subgraph Generator["Generator Architecture (z → image)"]
+Generator["Generator Architecture (z → image)"]
         Z["Input z (100-d noise vector)"]
         L1["Linear(100 → 128×7×7)"]
         A1["ReLU"]
@@ -116,7 +116,7 @@ flowchart TD
 ```
 ```mermaid
 flowchart TD
-    subgraph Discriminator["Discriminator Architecture (image → probability)"]
+Discriminator["Discriminator Architecture (image → probability)"]
         X["Input image (1, 28, 28)"]
         C1["Conv2d(1 → 64, k=4, s=2, p=1)"]
         D1["LeakyReLU"]
@@ -281,6 +281,7 @@ Add a `LICENSE` file (e.g., MIT or Apache-2.0) to make the license explicit.
 ## ✨ Acknowledgements
 
 This repository is intended for experiments, demos, and teaching GAN fundamentals. If you'd like diagrams, CI badges, or a `CONTRIBUTING.md`, tell me which one to add next.
+
 
 
 
