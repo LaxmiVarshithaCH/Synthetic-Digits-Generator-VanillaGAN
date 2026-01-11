@@ -1,112 +1,249 @@
 # Synthetic Image Generator (Vanilla GAN)
 
-A compact, easy-to-run implementation of a Vanilla GAN for generating 28×28 grayscale images (MNIST-style). The repo includes training, evaluation, a Streamlit demo app, and a small FastAPI service for programmatic generation.
+A compact, easy-to-run implementation of a Vanilla GAN that generates 28×28 grayscale images (MNIST-style). This repository contains everything needed to train, evaluate, serve and monitor a small experimental GAN for research, demos, and data augmentation.
 
 ---
 
-## 🔧 Key features
+## 📌 Project Introduction
 
-- Vanilla GAN with simple Conv/ConvTranspose architecture (Generator & Discriminator)
-- Training loop with TensorBoard logging and checkpointing
-- Inference script to generate image grids and single images
-- Evaluation utilities (FID, diversity, t-SNE visualization)
-- Streamlit app for interactive generation and FastAPI for programmatic access
+This project demonstrates a Vanilla Generative Adversarial Network (GAN) end-to-end: from data preparation and model training to evaluation and serving. It is designed to be simple, reproducible, and suitable for small-scale experiments or educational use.
+
+Why this project matters:
+- Create privacy-preserving synthetic images for augmentation or sharing
+- Demonstrate core GAN concepts in a compact codebase
+- Provide a reproducible pipeline for experimentation and evaluation
 
 ---
 
-## 🚀 Quickstart
+## 🧭 Overview
 
-1. Create a virtual environment and install dependencies:
+- Data: MNIST-style grayscale images (28×28)
+- Model: Vanilla GAN (simple MLP/ConvTranspose based Generator and Conv Discriminator)
+- Delivery: CLI scripts, Streamlit demo UI (`src/app.py`) and FastAPI service (`src/api.py`)
+- Metrics: FID, diversity and t-SNE visualizations via `src/evaluation.py`
 
-```bash
-python -m venv .venv
-source .venv/bin/activate  # macOS / Linux
-pip install -r requirements.txt
+---
+
+## 📁 File structure
+
+```
+project1/
+├── config.yaml                 # default hyperparameters
+├── requirements.txt
+├── Dockerfile                  # (optional) containerization
+├── checkpoints/                # periodic checkpoints
+├── outputs/                    # final model artifacts
+├── samples/                    # generated images
+├── figures/                    # evaluation plots
+├── logs/                       # training logs (CSV & TensorBoard)
+└── src/
+    ├── train.py
+    ├── inference.py
+    ├── evaluation.py
+    ├── app.py                  # Streamlit demo
+    ├── api.py                  # FastAPI server
+    ├── vanilla_gan.py
+    ├── generator.py
+    ├── discriminator.py
+    ├── data_loader.py
+    └── utils/
+        ├── visualizer.py
+        └── logger.py
 ```
 
-2. Configure hyperparameters in `config.yaml` (image size, batch size, epochs, lr, etc.)
+---
 
-3. Download dataset and run training:
+## 🧩 Modules & Design
 
+### 1) Data Pipeline & Preprocessing
+
+High level:
+- Uses `torchvision.datasets.MNIST` in `src/data_loader.py`
+- Transforms: resize, ToTensor, Normalize to (-1, 1)
+- Splits dataset into train/test and saves processed subsets under `data/processed/`
+
+Low level:
+- `get_dataloaders()` reads `config.yaml`, constructs transforms, downloads MNIST to `data/raw`, performs `random_split`, and returns `DataLoader` objects.
+
+Commands:
 ```bash
-# download happens automatically when running the data loader
+python -c "from src.data_loader import get_dataloaders; get_dataloaders()"
+```
+
+---
+
+### 2) Model Design (Vanilla GAN Architecture)
+
+High level:
+- Generator: transforms noise vector z (dim = `noise_dim`) into 28×28 image using Linear → ReLU → ConvTranspose layers and `Tanh` output.
+- Discriminator: small convolutional network ending with Sigmoid probability output.
+
+Architecture diagram (ASCII):
+
+Generator (z → image):
+```
+[z (100)]
+  └─ Linear(100 → 128*7*7)
+      └─ ReLU
+          └─ Unflatten → (128,7,7)
+              └─ ConvTranspose2d(128→64, k=4, s=2, p=1)
+                  └─ ReLU
+                      └─ ConvTranspose2d(64→1, k=4, s=2, p=1)
+                          └─ Tanh -> (1,28,28)
+```
+
+Discriminator (image → prob):
+```
+(1,28,28)
+  └─ Conv2d(1→64, k=4, s=2, p=1)
+      └─ LeakyReLU
+          └─ Conv2d(64→128, k=4, s=2, p=1)
+              └─ LeakyReLU
+                  └─ Flatten → Linear(128*7*7 → 1) → Sigmoid
+```
+
+Low-level details (weights, activations, loss):
+- Loss: `BCELoss` for both D and G as implemented in `src/vanilla_gan.py`
+- Optimizer: Adam with `lr` and `beta1` from `config.yaml`
+- Label smoothing for real images (0.9 used in `src/train.py`)
+
+If you want PNG/UML diagrams, add `docs/architecture.png` and reference it here.
+
+---
+
+### 3) Training Pipeline
+
+High level steps:
+1. Load config from `config.yaml`
+2. Build dataloaders and models (G, D)
+3. For each epoch: update D on real and fake, update G to fool D
+4. Log losses to TensorBoard, save checkpoints to `checkpoints/`
+
+Key files: `src/train.py`, `src/vanilla_gan.py`, `src/utils/logger.py`, `src/utils/visualizer.py`
+
+Commands:
+```bash
 python src/train.py
-```
-
-Checkpoints are saved to `checkpoints/` every 10 epochs and the final models to `outputs/`.
-
-4. Run inference to create a grid of generated images:
-
-```bash
-python src/inference.py --model-path outputs/G_final.pt --num-images 16
-# or simply: python src/inference.py
-```
-
-5. (Optional) Run the demo app or API
-
-```bash
-# Streamlit UI
-streamlit run src/app.py
-
-# FastAPI server
-uvicorn src.api:app --reload
-```
-
-Open TensorBoard to inspect training logs:
-
-```bash
+# monitor progress
 tensorboard --logdir=runs
 ```
 
----
-
-## ⚙️ Configuration
-
-Edit `config.yaml` to change model/hyperparameters (noise_dim, lr, batch_size, epochs, image_size, etc.).
-
----
-
-## 📁 Repository layout (high level)
-
-- `src/` — implementation (training, model, data loader, inference, evaluation, app and API)
-- `config.yaml` — default hyperparameters
-- `checkpoints/` — intermediate generator weights
-- `outputs/` — final model weights
-- `samples/` — generated images and grids
-- `figures/` — evaluation visualizations
-- `logs/` — training CSV logs and TensorBoard data
+Best practices:
+- Use a GPU when available: torch auto-detects CUDA
+- Use small batches or limit data if memory is constrained
+- Check checkpoints under `checkpoints/` to resume training
 
 ---
 
-## 🧪 Evaluation
+### 4) Evaluation & Quality Assurance
 
-Run `python src/evaluation.py` to compute FID/diversity scores and generate a t-SNE plot comparing real vs generated samples. The evaluation script is CPU-friendly and limits samples to be memory-safe.
-
----
-
-## 🧑‍💻 Development notes
-
-- To reproduce results, use the `config.yaml` defaults and train for at least the number of epochs listed there.
-- The code assumes you run scripts from the repository root (e.g., `python src/train.py`).
-- Check `src/utils` for logging and visualization helpers.
+- `python src/evaluation.py` computes FID and diversity and saves a t-SNE plot to `figures/`
+- Tests to add: unit tests for `data_loader`, shape checks for model outputs, smoke tests for inference and API endpoints
+- Recommended CI checks: linting (`flake8`/`ruff`), unit tests, and a small smoke test that loads model weights and runs `src/inference.py` with `num_images=4`
 
 ---
 
-## 🙌 Contributing & Support
+### 5) Deployment Layer
 
-Contributions are welcome — please open issues or pull requests. If you have a preferred workflow, add a `CONTRIBUTING.md` and link it here.
+Options included in repo:
+- Streamlit demo (`src/app.py`) — run locally with `streamlit run src/app.py`
+- FastAPI microservice (`src/api.py`) — run with `uvicorn src.api:app --reload`
+- Docker: There is a `Dockerfile` (update if you want a production image)
 
-If you need help, open an issue or contact the maintainer.
+Production suggestions:
+- Containerize model + app, serve behind an ASGI server (Gunicorn + Uvicorn workers)
+- Use model versioning for A/B testing and rollback
+
+---
+
+### 6) Monitoring & Update Pipeline
+
+- Training metrics: TensorBoard logs in `runs/` and CSV logs in `logs/training_logs.csv`
+- Model artifacts: store in `outputs/` and tag with epoch/version
+- Suggested automations:
+  - CI job to run tests and/or a lightweight evaluation on new PRs
+  - Scheduled retraining jobs (cron / GitHub Actions) for frequent data drift checks
+  - Alerts for metric regressions (e.g., FID increase)
+
+---
+
+## ⚙️ Configuration (fields in `config.yaml`)
+
+- `image_size` (int): image height and width (default 28)
+- `channels` (int): image channels (1)
+- `noise_dim` (int): size of latent vector (100)
+- `batch_size` (int): training batch size
+- `epochs` (int)
+- `lr` (float): learning rate
+- `beta1` (float): Adam optimizer beta1
+- `train_split` (float): train / test split ratio
+- `normalization` (string): normalization applied to images (tanh)
+
+---
+
+## ▶️ Common commands
+
+Setup and install:
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+Train:
+```bash
+python src/train.py
+```
+
+Inference (save grid):
+```bash
+python src/inference.py --model-path outputs/G_final.pt --num-images 16
+```
+
+Run demo locally:
+```bash
+streamlit run src/app.py
+```
+
+Run API server:
+```bash
+uvicorn src.api:app --reload
+```
+
+Evaluate:
+```bash
+python src/evaluation.py
+```
+
+Run quick smoke test:
+```bash
+python -c "from src.inference import generate_images; generate_images(num_images=4)"
+```
+
+---
+
+## 👥 Team & Maintainers
+
+- Maintainer: **Replace with your name** — add email or GitHub handle here
+- Contributors: Add names or link to `CONTRIBUTING.md`
+
+If you'd like, I can populate this section with real team member names and contact information.
+
+---
+
+## 🙌 Contributing
+
+Contributions welcome — please open issues or PRs. Consider adding a `CONTRIBUTING.md` for contribution workflow and a `CODE_OF_CONDUCT.md`.
 
 ---
 
 ## 📜 License
 
-If this repository is missing a `LICENSE` file, add one to make the intended license explicit (e.g., MIT, Apache-2.0).
+Add a `LICENSE` file (e.g., MIT or Apache-2.0) to make the license explicit.
 
 ---
 
 ## ✨ Acknowledgements
 
-This is a teaching/experimental repo intended for quick experimentation, demos and small experiments (data augmentation, privacy-preserving synthetic data, demos).
+This repository is intended for experiments, demos, and teaching GAN fundamentals. If you'd like diagrams, CI badges, or a `CONTRIBUTING.md`, tell me which one to add next.
 
