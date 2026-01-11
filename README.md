@@ -245,6 +245,15 @@ python -c "from src.inference import generate_images; generate_images(num_images
 
 ---
 
+## ⚠️ Limitations
+
+- Uses a basic Vanilla GAN architecture (no DCGAN or WGAN-GP).
+- Image quality is limited compared to modern diffusion models.
+
+These limitations are intentional to maintain simplicity and educational clarity.
+
+---
+
 ## 👥 Team
 
 <table>
@@ -308,6 +317,7 @@ Have suggestions or improvements?
 Feel free to open an issue or submit a pull request. Happy coding! 🚀
 
 ---
+
 
 
 
