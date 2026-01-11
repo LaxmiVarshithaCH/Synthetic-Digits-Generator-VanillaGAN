@@ -13,3 +13,6 @@ runs/
 .DS_Store
 .streamlit/
 .ipynb_checkpoints/
+reports/Project_Documentation.docx
+reports/System_Requirements_Specification.docx
+reports/Training_and_Evaluation_Report.docx
