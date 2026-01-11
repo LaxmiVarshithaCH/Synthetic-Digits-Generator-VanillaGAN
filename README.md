@@ -99,6 +99,34 @@ Discriminator (image → prob):
               └─ LeakyReLU
                   └─ Flatten → Linear(128*7*7 → 1) → Sigmoid
 ```
+```mermaid
+flowchart TD
+    subgraph Generator["Generator Architecture (z → image)"]
+        Z["Input z (100-d noise vector)"]
+        L1["Linear(100 → 128×7×7)"]
+        A1["ReLU"]
+        U1["Unflatten → (128, 7, 7)"]
+        CT1["ConvTranspose2d(128 → 64, k=4, s=2, p=1)"]
+        A2["ReLU"]
+        CT2["ConvTranspose2d(64 → 1, k=4, s=2, p=1)"]
+        A3["Tanh → Output (1, 28, 28)"]
+
+        Z --> L1 --> A1 --> U1 --> CT1 --> A2 --> CT2 --> A3
+    end
+
+    subgraph Discriminator["Discriminator Architecture (image → probability)"]
+        X["Input image (1, 28, 28)"]
+        C1["Conv2d(1 → 64, k=4, s=2, p=1)"]
+        D1["LeakyReLU"]
+        C2["Conv2d(64 → 128, k=4, s=2, p=1)"]
+        D2["LeakyReLU"]
+        F1["Flatten"]
+        L2["Linear(128×7×7 → 1)"]
+        A4["Sigmoid → Real/Fake probability"]
+
+        X --> C1 --> D1 --> C2 --> D2 --> F1 --> L2 --> A4
+    end
+```
 
 Low-level details (weights, activations, loss):
 - Loss: `BCELoss` for both D and G as implemented in `src/vanilla_gan.py`
@@ -250,6 +278,7 @@ Add a `LICENSE` file (e.g., MIT or Apache-2.0) to make the license explicit.
 ## ✨ Acknowledgements
 
 This repository is intended for experiments, demos, and teaching GAN fundamentals. If you'd like diagrams, CI badges, or a `CONTRIBUTING.md`, tell me which one to add next.
+
 
 
 
