@@ -12,13 +12,14 @@ Why this project matters:
 - Create privacy-preserving synthetic images for augmentation or sharing
 - Demonstrate core GAN concepts in a compact codebase
 - Provide a reproducible pipeline for experimentation and evaluation
+- Prevents exposure of real or sensitive data by generating statistically similar but synthetic samples
 
 ---
 
 ## 🧭 Overview
 
 - Data: MNIST-style grayscale images (28×28)
-- Model: Vanilla GAN (simple MLP/ConvTranspose based Generator and Conv Discriminator)
+- Model: Vanilla GAN (fully connected generator with optional reshaping and a convolutional discriminator)
 - Delivery: CLI scripts, Streamlit demo UI (`src/app.py`) and FastAPI service (`src/api.py`)
 - Metrics: FID, diversity and t-SNE visualizations via `src/evaluation.py`
 
@@ -50,6 +51,7 @@ project1/
         ├── visualizer.py
         └── logger.py
 ```
+Note: Some directories such as `checkpoints/`, `logs/`, and `data/` may be excluded from version control in `.gitignore` to keep the repository lightweight.
 
 ---
 
@@ -181,13 +183,19 @@ Production suggestions:
 
 ---
 
-## ▶️ Common commands
-
+## ▶️ Execution Commands
+### Core Commands (Executed During Development)
 Setup and install:
 ```bash
 python -m venv .venv
-source .venv/bin/activate
+source .venv/bin/activate     \\for macos/linux
+.venv\Scripts\activate        \\for windows(cmd)
 pip install -r requirements.txt
+```
+
+Load and preprocess dataset:
+```bash
+python -c "from src.data_loader import get_dataloaders; get_dataloaders()"
 ```
 
 Train:
@@ -195,9 +203,9 @@ Train:
 python src/train.py
 ```
 
-Inference (save grid):
+Evaluate:
 ```bash
-python src/inference.py --model-path outputs/G_final.pt --num-images 16
+python src/evaluation.py
 ```
 
 Run demo locally:
@@ -210,9 +218,10 @@ Run API server:
 uvicorn src.api:app --reload
 ```
 
-Evaluate:
+### Optional / Extended Commands
+Inference (save grid):
 ```bash
-python src/evaluation.py
+python src/inference.py --model-path outputs/G_final.pt --num-images 16
 ```
 
 Run quick smoke test:
@@ -246,4 +255,5 @@ Add a `LICENSE` file (e.g., MIT or Apache-2.0) to make the license explicit.
 ## ✨ Acknowledgements
 
 This repository is intended for experiments, demos, and teaching GAN fundamentals. If you'd like diagrams, CI badges, or a `CONTRIBUTING.md`, tell me which one to add next.
+
 
