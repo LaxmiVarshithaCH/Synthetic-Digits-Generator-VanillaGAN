@@ -102,8 +102,9 @@ Discriminator (image → prob):
 
 ```mermaid
 flowchart LR
+
     %% =========================
-    %% Generator (Vertical)
+    %% Generator (LEFT)
     %% =========================
     subgraph G["Generator Architecture (z → image)"]
         direction TB
@@ -120,7 +121,7 @@ flowchart LR
     end
 
     %% =========================
-    %% Discriminator (Vertical)
+    %% Discriminator (RIGHT)
     %% =========================
     subgraph D["Discriminator Architecture (image → probability)"]
         direction TB
@@ -135,6 +136,10 @@ flowchart LR
 
         X --> C1 --> D1 --> C2 --> D2 --> F1 --> L2 --> A4
     end
+
+    %% Invisible edge to force horizontal layout
+    G --- D
+
 
 ```
 
@@ -288,6 +293,7 @@ Add a `LICENSE` file (e.g., MIT or Apache-2.0) to make the license explicit.
 ## ✨ Acknowledgements
 
 This repository is intended for experiments, demos, and teaching GAN fundamentals. If you'd like diagrams, CI badges, or a `CONTRIBUTING.md`, tell me which one to add next.
+
 
 
 
