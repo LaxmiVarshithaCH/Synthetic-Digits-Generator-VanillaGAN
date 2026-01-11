@@ -113,7 +113,9 @@ flowchart TB
 
         Z --> L1 --> A1 --> U1 --> CT1 --> A2 --> CT2 --> A3
     end
-
+```
+```mermaid
+flowchart TB
     subgraph Discriminator["Discriminator Architecture (image → probability)"]
         X["Input image (1, 28, 28)"]
         C1["Conv2d(1 → 64, k=4, s=2, p=1)"]
@@ -279,6 +281,7 @@ Add a `LICENSE` file (e.g., MIT or Apache-2.0) to make the license explicit.
 ## ✨ Acknowledgements
 
 This repository is intended for experiments, demos, and teaching GAN fundamentals. If you'd like diagrams, CI badges, or a `CONTRIBUTING.md`, tell me which one to add next.
+
 
 
 
