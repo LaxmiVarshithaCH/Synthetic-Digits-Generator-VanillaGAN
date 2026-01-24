@@ -283,26 +283,26 @@ These limitations are intentional to maintain simplicity and educational clarity
       <br />
     </td>
       <td align="center">
-      <a href="https://github.com/LaxmiVarshithaCH">
-        <img src="https://avatars.githubusercontent.com/LaxmiVarshithaCH" width="100px;" alt=""/>
+      <a href="https://github.com/2300033338">
+        <img src="https://avatars.githubusercontent.com/2300033338" width="100px;" alt=""/>
         <br />
         <sub><b>V. Swarna Blessy</b></sub>
       </a>
       <br />
     </td>
       <td align="center">
-      <a href="https://github.com/LaxmiVarshithaCH">
-        <img src="https://avatars.githubusercontent.com/LaxmiVarshithaCH" width="100px;" alt=""/>
+      <a href="https://github.com/2300030435">
+        <img src="https://avatars.githubusercontent.com/2300030435" width="100px;" alt=""/>
         <br />
         <sub><b>MD. Muskan</b></sub>
       </a>
       <br />
     </td>
       <td align="center">
-      <a href="https://github.com/LaxmiVarshithaCH">
-        <img src="https://avatars.githubusercontent.com/LaxmiVarshithaCH" width="100px;" alt=""/>
+      <a href="https://github.com/likhil2300030419">
+        <img src="https://avatars.githubusercontent.com/likhil2300030419" width="100px;" alt=""/>
         <br />
-        <sub><b>Likihl Sir Sai</b></sub>
+        <sub><b>Likhil Sir Sai</b></sub>
       </a>
       <br />
     </td>
