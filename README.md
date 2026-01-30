@@ -275,8 +275,8 @@ These limitations are intentional to maintain simplicity and educational clarity
       <br />
     </td>
     <td align="center">
-      <a href="https://github.com/LaxmiVarshithaCH">
-        <img src="https://avatars.githubusercontent.com/LaxmiVarshithaCH" width="100px;" alt=""/>
+      <a href="https://github.com/Jhansi652">
+        <img src="https://avatars.githubusercontent.com/Jhansi652" width="100px;" alt=""/>
         <br />
         <sub><b>Y. Jhansi</b></sub>
       </a>
