@@ -163,7 +163,7 @@ Best practices:
 - Recommended CI checks: linting (`flake8`/`ruff`), unit tests, and a small smoke test that loads model weights and runs `src/inference.py` with `num_images=4`
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/da6a0b3c-9156-43a6-b169-7dca7afdae26" width="600" height="600" alt="Inference"/>
+  <img src="https://github.com/user-attachments/assets/da6a0b3c-9156-43a6-b169-7dca7afdae26" width="122" height="122" alt="Inference"/>
   <br>
   <em>Inference</em>
 </p>
@@ -179,16 +179,15 @@ Best practices:
 
 Options included in repo:
 - Streamlit demo (`src/app.py`) — run locally with `streamlit run src/app.py`
-<img width="2940" height="1912" alt="image" src="https://github.com/user-attachments/assets/2a8acab5-4647-4a9c-936a-835382275b33" />
+
 <p align="center">
-  <img src=""https://github.com/user-attachments/assets/2a8acab5-4647-4a9c-936a-835382275b33" width="2940" height1912" alt="UI output"/>
+  <img src="https://github.com/user-attachments/assets/2a8acab5-4647-4a9c-936a-835382275b33" width="2940" height1912" alt="UI output"/>
   <br>
   <em>Streamlit UI - Generates Images</em>
 </p>
 
-<img width="2940" height="1912" alt="image" src="https://github.com/user-attachments/assets/727a9e59-f118-4f43-9261-1e63eb760a3c" />
 <p align="center">
-  <img src=""https://github.com/user-attachments/assets/2a8acab5-4647-4a9c-936a-835382275b33" width="2940" height1912" alt="UI output"/>
+  <img src="https://github.com/user-attachments/assets/2a8acab5-4647-4a9c-936a-835382275b33" width="2940" height1912" alt="UI output"/>
   <br>
   <em>Streamlit UI - Option to download generated images as .zip</em>
 </p>
