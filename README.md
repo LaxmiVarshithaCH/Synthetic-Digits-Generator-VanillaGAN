@@ -181,13 +181,13 @@ Options included in repo:
 - Streamlit demo (`src/app.py`) — run locally with `streamlit run src/app.py`
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/2a8acab5-4647-4a9c-936a-835382275b33" width="2940" height1912" alt="UI output"/>
+  <img src="https://github.com/user-attachments/assets/2a8acab5-4647-4a9c-936a-835382275b33" width="2940" height="1912" alt="UI output"/>
   <br>
   <em>Streamlit UI - Generates Images</em>
 </p>
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/2a8acab5-4647-4a9c-936a-835382275b33" width="2940" height1912" alt="UI output"/>
+  <img src="https://github.com/user-attachments/assets/aeba2a22-a661-455f-97b7-1b45bff8f8a0" width="2940" height="1912" alt="UI output"/>
   <br>
   <em>Streamlit UI - Option to download generated images as .zip</em>
 </p>
