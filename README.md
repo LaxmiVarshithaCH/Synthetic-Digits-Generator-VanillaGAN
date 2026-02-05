@@ -144,6 +144,11 @@ python src/train.py
 tensorboard --logdir=runs
 ```
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/bb5c9678-4b6f-48d0-a687-57cf04a69daf" width="500" height="500" alt="Epoch 50 sample"/>
+  <br>
+  <em>Sample at Epoch 50</em>
+</p>
 Best practices:
 - Use a GPU when available: torch auto-detects CUDA
 - Use small batches or limit data if memory is constrained
@@ -157,12 +162,37 @@ Best practices:
 - Tests to add: unit tests for `data_loader`, shape checks for model outputs, smoke tests for inference and API endpoints
 - Recommended CI checks: linting (`flake8`/`ruff`), unit tests, and a small smoke test that loads model weights and runs `src/inference.py` with `num_images=4`
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/da6a0b3c-9156-43a6-b169-7dca7afdae26" width="600" height="600" alt="Inference"/>
+  <br>
+  <em>Inference</em>
+</p>
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/7e39eacd-2287-44e9-b1ed-8dbb69fa5001" width="600" height="600" alt="tSNE plot"/>
+  <br>
+  <em>tSNE Plot - Real vs Fake</em>
+</p>
 ---
 
 ### 5) Deployment Layer
 
 Options included in repo:
 - Streamlit demo (`src/app.py`) — run locally with `streamlit run src/app.py`
+<img width="2940" height="1912" alt="image" src="https://github.com/user-attachments/assets/2a8acab5-4647-4a9c-936a-835382275b33" />
+<p align="center">
+  <img src=""https://github.com/user-attachments/assets/2a8acab5-4647-4a9c-936a-835382275b33" width="2940" height1912" alt="UI output"/>
+  <br>
+  <em>Streamlit UI - Generates Images</em>
+</p>
+
+<img width="2940" height="1912" alt="image" src="https://github.com/user-attachments/assets/727a9e59-f118-4f43-9261-1e63eb760a3c" />
+<p align="center">
+  <img src=""https://github.com/user-attachments/assets/2a8acab5-4647-4a9c-936a-835382275b33" width="2940" height1912" alt="UI output"/>
+  <br>
+  <em>Streamlit UI - Option to download generated images as .zip</em>
+</p>
+
 - FastAPI microservice (`src/api.py`) — run with `uvicorn src.api:app --reload`
 - Docker: There is a `Dockerfile` (update if you want a production image)
 
