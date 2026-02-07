@@ -173,6 +173,7 @@ Best practices:
   <br>
   <em>tSNE Plot - Real vs Fake</em>
 </p>
+
 ---
 
 ### 5) Deployment Layer
